@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAYSUNDO - Find Your Perfect Retreat</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --sand: #E8DCC4;
+            --terracotta: #C9ADA7;
+            --sage: #9CAF88;
+            --clay: #A8927D;
+            --cream: #F5F1E8;
+            --forest: #5D6F5B;
+            --ocean: #7FA99B;
+            --sunset: #D4A59A;
+            --text-dark: #3D3D3D;
+            --text-light: #6B6B6B;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text-dark);
+            background-color: var(--cream);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--forest);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--sage);
+        }
+
+        .nav-cta {
+            background: var(--sage);
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .nav-cta:hover {
+            background: var(--forest);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--ocean) 0%, var(--sage) 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        /* Search Bar */
+        .search-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            padding: 1rem;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .search-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 0.8rem 1rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .search-select {
+            flex: 0.5;
+            min-width: 150px;
+            padding: 0.8rem 1rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+        }
+
+        .search-btn {
+            background: var(--forest);
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .search-btn:hover {
+            background: var(--sage);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Section Headers */
+        .section-header {
+            margin-bottom: 2rem;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            color: var(--forest);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        /* Retreat Grid */
+        .retreat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .retreat-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .retreat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+
+        .retreat-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            background: var(--sand);
+        }
+
+        .retreat-content {
+            padding: 1.5rem;
+        }
+
+        .retreat-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: var(--cream);
+            color: var(--forest);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .retreat-title {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .retreat-host {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .host-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--terracotta);
+        }
+
+        .retreat-location {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .retreat-dates {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .retreat-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .retreat-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--forest);
+        }
+
+        .retreat-price span {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--text-light);
+        }
+
+        .apply-badge {
+            background: var(--sunset);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Filters */
+        .filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+
+        .filter-btn {
+            padding: 0.6rem 1.2rem;
+            border: 2px solid var(--sand);
+            background: white;
+            border-radius: 24px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+
+        .filter-btn.active {
+            background: var(--sage);
+            border-color: var(--sage);
+            color: white;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--sage);
+        }
+
+        /* Detail Page */
+        .detail-hero {
+            height: 400px;
+            background: var(--sand);
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .detail-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 3rem;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+        }
+
+        .detail-main h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--forest);
+        }
+
+        .detail-meta {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-light);
+        }
+
+        .detail-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+        }
+
+        .detail-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .detail-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--forest);
+        }
+
+        .detail-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .detail-section li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .detail-section li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--sage);
+            font-weight: bold;
+        }
+
+        /* Booking Sidebar */
+        .booking-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 100px;
+        }
+
+        .booking-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--forest);
+            margin-bottom: 0.5rem;
+        }
+
+        .booking-price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text-light);
+        }
+
+        .booking-info {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+        }
+
+        .info-label {
+            color: var(--text-light);
+        }
+
+        .info-value {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .booking-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--sage);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-bottom: 1rem;
+        }
+
+        .booking-btn:hover {
+            background: var(--forest);
+        }
+
+        .booking-note {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        /* Host Profile */
+        .host-header {
+            background: white;
+            padding: 3rem 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .host-profile {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .host-avatar-large {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: var(--terracotta);
+        }
+
+        .host-info h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--forest);
+        }
+
+        .host-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--forest);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .host-bio {
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+            padding: 0 2rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+        }
+
+        .affiliate-banner {
+            background: linear-gradient(135deg, var(--sunset) 0%, var(--terracotta) 100%);
+            padding: 2rem;
+            border-radius: 16px;
+            color: white;
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+            margin-left: 2rem;
+            margin-right: 2rem;
+        }
+
+        .affiliate-banner h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .affiliate-banner p {
+            margin-bottom: 1rem;
+            opacity: 0.95;
+        }
+
+        .affiliate-btn {
+            background: white;
+            color: var(--sunset);
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .affiliate-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-header h2 {
+            font-size: 1.8rem;
+            color: var(--forest);
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--sage);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: var(--forest);
+        }
+
+        /* Loading Indicator */
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-light);
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 1rem;
+            border: 4px solid var(--sand);
+            border-top-color: var(--sage);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .search-container {
+                flex-direction: column;
+            }
+
+            .search-input,
+            .search-select {
+                width: 100%;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .retreat-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .booking-card {
+                position: static;
+            }
+
+            .host-profile {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .host-stats {
+                justify-content: center;
+            }
+
+            .detail-hero {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">RAYSUNDO</div>
+            <ul class="nav-links">
+                <li><a href="#" onclick="showPage('home')">Explore</a></li>
+                <li><a href="#" onclick="showPage('listings')">All Retreats</a></li>
+                <li><a href="#">Become a Host</a></li>
+            </ul>
+            <a href="#" class="nav-cta">Sign In</a>
+        </div>
+    </nav>
+
+    <!-- HOME PAGE -->
+    <div id="home-page">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Discover Your Next Journey</h1>
+            <p>Transformative retreats led by inspiring creators</p>
+            
+            <!-- Search Bar -->
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Where do you want to go?">
+                <select class="search-select">
+                    <option>Retreat Type</option>
+                    <option>Wellness</option>
+                    <option>Adventure</option>
+                    <option>Yoga</option>
+                    <option>Meditation</option>
+                    <option>Surf & Beach</option>
+                    <option>Mountain</option>
+                    <option>Creative</option>
+                </select>
+                <button class="search-btn">Search</button>
+            </div>
+        </section>
+
+        <!-- Featured Retreats -->
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured Retreats</h2>
+                <p>Handpicked experiences from top-rated hosts</p>
+            </div>
+
+            <div class="retreat-grid">
+                <div class="retreat-card" onclick="showPage('detail')">
+                    <div class="retreat-image" style="background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), var(--ocean);"></div>
+                    <div class="retreat-content">
+                        <div class="retreat-tags">
+                            <span class="tag">Yoga</span>
+                            <span class="tag">Wellness</span>
+                        </div>
+                        <h3 class="retreat-title">Bali Mindfulness & Yoga</h3>
+                        <div class="retreat-host">
+                            <div class="host-avatar"></div>
+                            <span>Sarah Johnson</span>
+                        </div>
+                        <p class="retreat-location">📍 Ubud, Bali</p>
+                        <p class="retreat-dates">🗓️ Mar 15-22, 2026</p>
+                        <div class="retreat-footer">
+                            <div class="retreat-price">$2,400<span>/person</span></div>
+                            <div class="apply-badge">Apply</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="retreat-card" onclick="showPage('detail')">
+                    <div class="retreat-image" style="background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), var(--forest);"></div>
+                    <div class="retreat-content">
+                        <div class="retreat-tags">
+                            <span class="tag">Adventure</span>
+                            <span class="tag">Mountain</span>
+                        </div>
+                        <h3 class="retreat-title">Swiss Alps Leadership Trek</h3>
+                        <div class="retreat-host">
+                            <div class="host-avatar" style="background: var(--clay);"></div>
+                            <span>Marcus Chen</span>
+                        </div>
+                        <p class="retreat-location">📍 Zermatt, Switzerland</p>
+                        <p class="retreat-dates">🗓️ Jun 8-14, 2026</p>
+                        <div class="retreat-footer">
+                            <div class="retreat-price">$3,800<span>/person</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="retreat-card" onclick="showPage('detail')">
+                    <div class="retreat-image" style="background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), var(--sunset);"></div>
+                    <div class="retreat-content">
+                        <div class="retreat-tags">
+                            <span class="tag">Surf</span>
+                            <span class="tag">Beach</span>
+                        </div>
+                        <h3 class="retreat-title">Costa Rica Surf & Soul</h3>
+                        <div class="retreat-host">
+                            <div class="host-avatar" style="background: var(--ocean);"></div>
+                            <span>Elena Rodriguez</span>
+                        </div>
+                        <p class="retreat-location">📍 Nosara, Costa Rica</p>
+                        <p class="retreat-dates">🗓️ Feb 20-27, 2026</p>
+                        <div class="retreat-footer">
+                            <div class="retreat-price">$1,950<span>/person</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-header" style="margin-top: 3rem;">
+                <h2>Trending This Month</h2>
+                <p>Popular destinations and experiences</p>
+            </div>
+
+            <div class="retreat-grid">
+                <div class="retreat-card" onclick="showPage('detail')">
+                    <div class="retreat-image" style="background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), var(--sage);"></div>
+                    <div class="retreat-content">
+                        <div class="retreat-tags">
+                            <span class="tag">Meditation</span>
+                            <span class="tag">Wellness</span>
+                        </div>
+                        <h3 class="retreat-title">Tuscan Wellness Escape</h3>
+                        <div class="retreat-host">
+                            <div class="host-avatar" style="background: var(--sunset);"></div>
+                            <span>Isabella Rossi</span>
+                        </div>
+                        <p class="retreat-location">📍 Tuscany, Italy</p>
+                        <p class="retreat-dates">🗓️ Apr 12-19, 2026</p>
+                        <div class="retreat-footer">
+                            <div class="retreat-price">$3,200<span>/person</span></div>
+                            <div class="apply-badge">Apply</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="retreat-card" onclick="showPage('detail')">
+                    <div class="retreat-image" style="background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), var(--terracotta);"></div>
+                    <div class="retreat-content">
+                        <div class="retreat-tags">
+                            <span class="tag">Creative</span>
+                            <span class="tag">Wellness</span>
+                        </div>
+                        <h3 class="retreat-title">Morocco Creative Journey</h3>
+                        <div class="retreat-host">
+                            <div class="host-avatar" style="background: var(--clay);"></div>
+                            <span>Amir Hassan</span>
+                        </div>
+                        <p class="retreat-location">📍 Marrakech, Morocco</p>
+                        <p class="retreat-dates">🗓️ May 5-12, 2026</p>
+                        <div class="retreat-footer">
+                            <div class="retreat-price">$2,650<span>/person</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="retreat-card" onclick="showPage('detail')">
+                    <div class="retreat-image" style="background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), var(--clay);"></div>
+                    <div class="retreat-content">
+                        <div class="retreat-tags">
+                            <span class="tag">Yoga</span>
+                            <span class="tag">Beach</span>
+                        </div>
+                        <h3 class="retreat-title">Greek Island Yoga Retreat</h3>
+                        <div class="retreat-host">
+                            <div class="host-avatar" style="background: var(--ocean);"></div>
+                            <span>Sophia Pappas</span>
+                        </div>
+                        <p class="retreat-location">📍 Santorini, Greece</p>
+                        <p class="retreat-dates">🗓️ Jul 1-8, 2026</p>
+                        <div class="retreat-footer">
+                            <div class="retreat-price">$2,900<span>/person</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LISTINGS PAGE -->
+    <div id="listings-page" style="display: none;">
+        <div class="container">
+            <div class="section-header">
+                <h2>All Retreats</h2>
+                <p>Explore transformative experiences around the world</p>
+            </div>
+
+            <!-- Filters -->
+            <div class="filters">
+                <button class="filter-btn active">All</button>
+                <button class="filter-btn">Bali</button>
+                <button class="filter-btn">Europe</button>
+                <button class="filter-btn">Americas</button>
+                <button class="filter-btn">Asia</button>
+                <button class="filter-btn">Wellness</button>
+                <button class="filter-btn">Adventure</button>
+                <button class="filter-btn">Yoga</button>
+                <button class="filter-btn">Surf</button>
+            </div>
+
+            <div class="retreat-grid" id="retreat-list">
+                <!-- Retreats will be loaded here -->
+            </div>
+
+            <div class="loading" id="loading-indicator" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>Loading more retreats...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- DETAIL PAGE -->
+    <div id="detail-page" style="display: none;">
+        <div class="detail-hero" style="background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), var(--ocean);"></div>
+        
+        <div class="detail-content">
+            <div class="detail-grid">
+                <div class="detail-main">
+                    <div class="retreat-tags" style="margin-bottom: 1rem;">
+                        <span class="tag">Yoga</span>
+                        <span class="tag">Wellness</span>
+                    </div>
+                    
+                    <h1>Bali Mindfulness & Yoga Retreat</h1>
+                    
+                    <div class="detail-meta">
+                        <div class="meta-item">
+                            <div class="host-avatar"></div>
+                            <span>Hosted by Sarah Johnson</span>
+                        </div>
+                        <div class="meta-item">📍 Ubud, Bali</div>
+                        <div class="meta-item">🗓️ 7 days</div>
+                        <div class="meta-item">👥 12 spots</div>
+                    </div>
+
+                    <div class="detail-description">
+                        <p>Immerse yourself in the tranquil beauty of Ubud's lush jungle while deepening your yoga practice and cultivating mindfulness. This 7-day retreat offers the perfect balance of structured yoga sessions, guided meditation, and free time to explore Bali's stunning landscapes and rich culture.</p>
+                        
+                        <p style="margin-top: 1rem;">Wake up to the sounds of nature, practice yoga overlooking rice terraces, and nourish your body with organic, locally-sourced cuisine. Whether you're new to yoga or an experienced practitioner, this retreat will leave you feeling refreshed, centered, and deeply connected.</p>
+                    </div>
+
+                    <div class="detail-section">
+                        <h3>What's Included</h3>
+                        <ul>
+                            <li>7 nights accommodation in a private villa</li>
+                            <li>Daily yoga and meditation sessions (morning & evening)</li>
+                            <li>All meals - organic, vegetarian cuisine</li>
+                            <li>Guided nature walks and temple visits</li>
+                            <li>Traditional Balinese healing ceremony</li>
+                            <li>Airport transfers to/from retreat center</li>
+                            <li>Welcome and farewell dinners</li>
+                        </ul>
+                    </div>
+
+                    <div class="detail-section">
+                        <h3>Daily Schedule</h3>
+                        <ul>
+                            <li><strong>6:30 AM</strong> - Morning meditation & pranayama</li>
+                            <li><strong>7:30 AM</strong> - Vinyasa yoga flow</li>
+                            <li><strong>9:00 AM</strong> - Healthy breakfast</li>
+                            <li><strong>10:30 AM - 4:00 PM</strong> - Free time (workshops, spa, exploration)</li>
+                            <li><strong>4:30 PM</strong> - Yin yoga & restorative practice</li>
+                            <li><strong>6:00 PM</strong> - Dinner</li>
+                            <li><strong>7:30 PM</strong> - Evening meditation or group sharing</li>
+                        </ul>
+                    </div>
+
+                    <div class="detail-section">
+                        <h3>Application Requirements</h3>
+                        <p style="margin-bottom: 1rem; color: var(--text-dark);">This retreat has limited spots and requires a brief application. We're looking for committed individuals who are ready to embrace the full experience.</p>
+                        <ul>
+                            <li>Brief introduction about yourself and your yoga journey</li>
+                            <li>What you hope to gain from this retreat</li>
+                            <li>Any dietary restrictions or health considerations</li>
+                            <li>$500 reservation fee (credited toward total cost)</li>
+                        </ul>
+                    </div>
+
+                    <div class="detail-section">
+                        <h3>About Your Host</h3>
+                        <p style="color: var(--text-dark); line-height: 1.8;">Sarah Johnson is a 500-hour certified yoga instructor with over 10 years of teaching experience. She's led retreats across Southeast Asia and is passionate about creating transformative experiences that blend traditional yoga philosophy with modern mindfulness practices. Sarah's teaching style is nurturing, intuitive, and deeply grounding.</p>
+                        <button class="filter-btn" style="margin-top: 1rem;" onclick="showPage('host')">View Sarah's Profile →</button>
+                    </div>
+                </div>
+
+                <!-- Booking Sidebar -->
+                <div>
+                    <div class="booking-card">
+                        <div class="booking-price">$2,400<span>/person</span></div>
+                        
+                        <div class="booking-info">
+                            <div class="info-row">
+                                <span class="info-label">Duration</span>
+                                <span class="info-value">7 days / 6 nights</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Dates</span>
+                                <span class="info-value">Mar 15-22, 2026</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Spots Left</span>
+                                <span class="info-value">5 of 12</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Reservation Fee</span>
+                                <span class="info-value">$500</span>
+                            </div>
+                        </div>
+
+                        <button class="booking-btn" onclick="openModal('booking')">Apply Now</button>
+                        <p class="booking-note">You'll receive a response within 48 hours</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HOST PROFILE PAGE -->
+    <div id="host-page" style="display: none;">
+        <div class="host-header">
+            <div class="host-profile">
+                <div class="host-avatar-large"></div>
+                <div class="host-info">
+                    <h1>Sarah Johnson</h1>
+                    <p style="color: var(--text-light); font-size: 1.1rem;">Yoga Teacher & Retreat Leader</p>
+                    <div class="host-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">15</div>
+                            <div class="stat-label">Retreats Hosted</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">240+</div>
+                            <div class="stat-label">Happy Guests</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">4.9</div>
+                            <div class="stat-label">Average Rating</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="host-bio">
+            <p>Hi, I'm Sarah! For the past decade, I've been guiding people on transformative yoga journeys across Southeast Asia and beyond. My approach combines traditional yoga wisdom with modern mindfulness practices, creating spaces where people can truly disconnect from the chaos of daily life and reconnect with themselves.</p>
+            
+            <p style="margin-top: 1rem;">I believe that the most powerful transformations happen when we step out of our comfort zones, surrounded by like-minded souls and the healing energy of nature. Every retreat I lead is carefully crafted to balance structure with freedom, challenge with rest, and introspection with connection.</p>
+        </div>
+
+        <!-- Affiliate Banner -->
+        <div class="affiliate-banner">
+            <h3>🌟 Become an Affiliate Partner</h3>
+            <p>Love what I do? Share my retreats with your community and earn 15% commission on every booking.</p>
+            <button class="affiliate-btn" onclick="openModal('affiliate')">Join Affiliate Program</button>
+        </div>
+
+        <div class="container">
+            <div class="section-header">
+                <h2>Sarah's Retreats</h2>
+                <p>Upcoming experiences hosted by Sarah</p>
+            </div>
+
+            <div class="retreat-grid">
+                <div class="retreat-card" onclick="showPage('detail')">
+                    <div class="retreat-image" style="background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), var(--ocean);"></div>
+                    <div class="retreat-content">
+                        <div class="retreat-tags">
+                            <span class="tag">Yoga</span>
+                            <span class="tag">Wellness</span>
+                        </div>
+                        <h3 class="retreat-title">Bali Mindfulness & Yoga</h3>
+                        <p class="retreat-location">📍 Ubud, Bali</p>
+                        <p class="retreat-dates">🗓️ Mar 15-22, 2026</p>
+                        <div class="retreat-footer">
+                            <div class="retreat-price">$2,400<span>/person</span></div>
+                            <div class="apply-badge">Apply</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="retreat-card" onclick="showPage('detail')">
+                    <div class="retreat-image" style="background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), var(--clay);"></div>
+                    <div class="retreat-content">
+                        <div class="retreat-tags">
+                            <span class="tag">Yoga</span>
+                            <span class="tag">Beach</span>
+                        </div>
+                        <h3 class="retreat-title">Thailand Beach Yoga Escape</h3>
+                        <p class="retreat-location">📍 Koh Samui, Thailand</p>
+                        <p class="retreat-dates">🗓️ Apr 10-17, 2026</p>
+                        <div class="retreat-footer">
+                            <div class="retreat-price">$2,100<span>/person</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="retreat-card" onclick="showPage('detail')">
+                    <div class="retreat-image" style="background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), var(--sage);"></div>
+                    <div class="retreat-content">
+                        <div class="retreat-tags">
+                            <span class="tag">Meditation</span>
+                            <span class="tag">Wellness</span>
+                        </div>
+                        <h3 class="retreat-title">Nepal Himalayan Meditation</h3>
+                        <p class="retreat-location">📍 Pokhara, Nepal</p>
+                        <p class="retreat-dates">🗓️ Sep 5-15, 2026</p>
+                        <div class="retreat-footer">
+                            <div class="retreat-price">$2,800<span>/person</span></div>
+                            <div class="apply-badge">Apply</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Modal -->
+    <div id="booking-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Apply for Retreat</h2>
+                <button class="close-modal" onclick="closeModal('booking')">×</button>
+            </div>
+
+            <form onsubmit="handleBooking(event)">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" required placeholder="Enter your full name">
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" required placeholder="your@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" required placeholder="+1 (555) 000-0000">
+                </div>
+
+                <div class="form-group">
+                    <label>Tell us about yourself and your yoga journey</label>
+                    <textarea required placeholder="Share a bit about your experience with yoga, meditation, and what draws you to this retreat..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>What do you hope to gain from this retreat?</label>
+                    <textarea required placeholder="What are your intentions and goals for this experience?"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Dietary Restrictions</label>
+                    <select>
+                        <option>None</option>
+                        <option>Vegetarian</option>
+                        <option>Vegan</option>
+                        <option>Gluten-Free</option>
+                        <option>Other (please specify in notes)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Additional Notes or Health Considerations</label>
+                    <textarea placeholder="Any allergies, injuries, or other information we should know?"></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Submit Application ($500 Reservation Fee)</button>
+                <p class="booking-note" style="margin-top: 1rem;">Your card will only be charged if your application is accepted</p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Affiliate Modal -->
+    <div id="affiliate-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Join Affiliate Program</h2>
+                <button class="close-modal" onclick="closeModal('affiliate')">×</button>
+            </div>
+
+            <form onsubmit="handleAffiliate(event)">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" required placeholder="Enter your full name">
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" required placeholder="your@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label>Platform/Channel</label>
+                    <select required>
+                        <option value="">Select your main platform</option>
+                        <option>Instagram</option>
+                        <option>YouTube</option>
+                        <option>TikTok</option>
+                        <option>Blog/Website</option>
+                        <option>Email List</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Platform URL or Handle</label>
+                    <input type="text" required placeholder="@yourhandle or your website URL">
+                </div>
+
+                <div class="form-group">
+                    <label>Approximate Audience Size</label>
+                    <input type="text" placeholder="e.g., 10k followers, 5k subscribers">
+                </div>
+
+                <div class="form-group">
+                    <label>Why do you want to promote these retreats?</label>
+                    <textarea required placeholder="Tell us about your connection to wellness, yoga, or why these retreats resonate with you..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Apply to Affiliate Program</button>
+                <p class="booking-note" style="margin-top: 1rem;">You'll receive your unique referral link within 24 hours</p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Sample retreat data for infinite scroll
+        const retreatData = [
+            {
+                title: "Iceland Northern Lights Wellness",
+                host: "Erik Magnusson",
+                location: "Reykjavik, Iceland",
+                dates: "Nov 12-19, 2026",
+                price: "$3,500",
+                tags: ["Wellness", "Adventure"],
+                color: "var(--ocean)"
+            },
+            {
+                title: "Peru Sacred Valley Yoga",
+                host: "Maria Santos",
+                location: "Cusco, Peru",
+                dates: "Aug 20-27, 2026",
+                price: "$2,200",
+                tags: ["Yoga", "Mountain"],
+                color: "var(--terracotta)",
+                apply: true
+            },
+            {
+                title: "Japanese Zen Meditation",
+                host: "Kenji Yamamoto",
+                location: "Kyoto, Japan",
+                dates: "Oct 5-12, 2026",
+                price: "$3,100",
+                tags: ["Meditation", "Wellness"],
+                color: "var(--sage)"
+            },
+            {
+                title: "Portugal Surf & Yoga",
+                host: "Sofia Costa",
+                location: "Algarve, Portugal",
+                dates: "May 15-22, 2026",
+                price: "$1,800",
+                tags: ["Surf", "Yoga"],
+                color: "var(--sunset)"
+            },
+            {
+                title: "Scottish Highlands Hiking Retreat",
+                host: "Duncan MacLeod",
+                location: "Isle of Skye, Scotland",
+                dates: "Jul 10-17, 2026",
+                price: "$2,600",
+                tags: ["Adventure", "Mountain"],
+                color: "var(--forest)",
+                apply: true
+            },
+            {
+                title: "Maldives Ocean Meditation",
+                host: "Aisha Rahman",
+                location: "Maldives",
+                dates: "Dec 1-8, 2026",
+                price: "$4,200",
+                tags: ["Meditation", "Beach"],
+                color: "var(--ocean)"
+            }
+        ];
+
+        let currentIndex = 0;
+        let isLoading = false;
+
+        // Page navigation
+        function showPage(page) {
+            document.getElementById('home-page').style.display = 'none';
+            document.getElementById('listings-page').style.display = 'none';
+            document.getElementById('detail-page').style.display = 'none';
+            document.getElementById('host-page').style.display = 'none';
+
+            if (page === 'home') {
+                document.getElementById('home-page').style.display = 'block';
+            } else if (page === 'listings') {
+                document.getElementById('listings-page').style.display = 'block';
+                if (document.getElementById('retreat-list').children.length === 0) {
+                    loadMoreRetreats();
+                }
+            } else if (page === 'detail') {
+                document.getElementById('detail-page').style.display = 'block';
+                window.scrollTo(0, 0);
+            } else if (page === 'host') {
+                document.getElementById('host-page').style.display = 'block';
+                window.scrollTo(0, 0);
+            }
+        }
+
+        // Load more retreats (infinite scroll)
+        function loadMoreRetreats() {
+            if (isLoading) return;
+            isLoading = true;
+            document.getElementById('loading-indicator').style.display = 'block';
+
+            setTimeout(() => {
+                const container = document.getElementById('retreat-list');
+                const batchSize = 3;
+                
+                for (let i = 0; i < batchSize; i++) {
+                    const retreat = retreatData[currentIndex % retreatData.length];
+                    const card = createRetreatCard(retreat);
+                    container.appendChild(card);
+                    currentIndex++;
+                }
+
+                isLoading = false;
+                document.getElementById('loading-indicator').style.display = 'none';
+            }, 800);
+        }
+
+        function createRetreatCard(retreat) {
+            const card = document.createElement('div');
+            card.className = 'retreat-card';
+            card.onclick = () => showPage('detail');
+            
+            card.innerHTML = `
+                <div class="retreat-image" style="background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), ${retreat.color};"></div>
+                <div class="retreat-content">
+                    <div class="retreat-tags">
+                        ${retreat.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
+                    <h3 class="retreat-title">${retreat.title}</h3>
+                    <div class="retreat-host">
+                        <div class="host-avatar" style="background: ${retreat.color};"></div>
+                        <span>${retreat.host}</span>
+                    </div>
+                    <p class="retreat-location">📍 ${retreat.location}</p>
+                    <p class="retreat-dates">🗓️ ${retreat.dates}</p>
+                    <div class="retreat-footer">
+                        <div class="retreat-price">${retreat.price}<span>/person</span></div>
+                        ${retreat.apply ? '<div class="apply-badge">Apply</div>' : ''}
+                    </div>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        // Infinite scroll detection
+        window.addEventListener('scroll', () => {
+            if (document.getElementById('listings-page').style.display === 'none') return;
+            
+            const scrollPosition = window.innerHeight + window.scrollY;
+            const pageHeight = document.documentElement.scrollHeight;
+            
+            if (scrollPosition >= pageHeight - 500) {
+                loadMoreRetreats();
+            }
+        });
+
+        // Modal functions
+        function openModal(type) {
+            document.getElementById(type + '-modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(type) {
+            document.getElementById(type + '-modal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function handleBooking(e) {
+            e.preventDefault();
+            alert('Application submitted! You\'ll receive a confirmation email shortly.');
+            closeModal('booking');
+        }
+
+        function handleAffiliate(e) {
+            e.preventDefault();
+            alert('Affiliate application submitted! We\'ll send your unique referral link within 24 hours.');
+            closeModal('affiliate');
+        }
+
+        // Close modal on outside click
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Filter buttons
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove active from all
+                    filterButtons.forEach(b => b.classList.remove('active'));
+                    // Add active to clicked
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
